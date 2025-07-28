@@ -1,0 +1,28 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  name: guestbook-app-latest
+  namespace: guestbook-app
+spec:
+  type: GitHub
+  pathname: https://github.com/kubernetes/examples.git
+  # secretRef:
+  #   name: github-credentials
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: guestbook-app
+  namespace: guestbook-app
+  labels:
+    app: guestbook-app
+  annotations:
+    apps.open-cluster-management.io/github-path: examples/guestbook
+    apps.open-cluster-management.io/github-branch: master
+spec:
+  channel: guestbook-app/guestbook-app-latest
+  placement:
+    placementRef:
+      kind: PlacementRule
+      name: dev-clusters

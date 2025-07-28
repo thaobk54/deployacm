@@ -1,0 +1,16 @@
+# kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+images:
+  - name: acm-custom-registry
+    newName: thaovu/acm-deploy-operator
+    newTag: "2.15.0"
+
+# list of Resource Config to be Applied
+resources:
+  - operator-group.yaml
+  - subscription.yaml

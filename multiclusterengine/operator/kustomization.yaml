@@ -1,0 +1,5 @@
+namespace: multicluster-engine
+
+resources:
+- operatorgroup.yaml
+- subscription.yaml
